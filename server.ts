@@ -3,7 +3,6 @@ import { createUserRoute, deleteUserRoute, readUserRoute, updateUserRoute } from
 import * as firebase from 'firebase-admin';
 import serviceAccount from "./service-account";
 import * as sa from "./firebase-adminsdk.json"
-import { verify } from "crypto";
 import { verifyIdTokenRoute } from "./src/verify-id-tokens/verify";
 
 
