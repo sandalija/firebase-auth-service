@@ -1,15 +1,16 @@
 import express, { Request, Response }  from "express"
 import { createUserRoute, deleteUserRoute, readUserRoute, updateUserRoute } from "./src/user-managment/crud";
 import * as firebase from 'firebase-admin';
-import serviceAccount from "./service-account";
-import * as sa from "./firebase-adminsdk.json"
 import { verifyIdTokenRoute } from "./src/verify-id-tokens/verify";
+import { readFileSync } from "fs";
+import { join } from "path";
 
-
-firebase.initializeApp({credential: firebase.credential.cert({...sa } as any),})
-//Create an app
 
 try {
+
+   const sa = readFileSync("/service-account/firebase.json", "utf-8")
+   firebase.initializeApp({credential: firebase.credential.cert(JSON.parse(sa)),})
+
     const app = express();
     app.use(express.json());
     app.use((err: unknown, req: Request, res: Response, next: Function) => {
