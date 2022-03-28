@@ -10,3 +10,15 @@ docker run -it --rm -p 8080:8080 -v $(pwd)/service-account:/service-account sand
 ```
 
 ## Docker-compose
+```yml
+version: '3'
+services:
+  firebase-auth-service:
+    build: .
+    container_name: 'firebase-auth-service'
+    restart: always
+    ports:
+      - 8080:8080
+    volumes:
+      - ./service-account:/service-account
+```
