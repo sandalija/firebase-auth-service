@@ -13,8 +13,8 @@ try {
 
     const app = express();
     app.use(express.json());
-    app.use((err: unknown, req: Request, res: Response, next: Function) => {
-        console.error(err)
+    app.use((req: Request, res: Response, next: Function) => {
+        console.log(req.method, req.url, req.body)
         next()
     })
     app.post('/user', (req, res) => createUserRoute(req, res));
