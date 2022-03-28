@@ -4,7 +4,7 @@ import * as firebase from 'firebase-admin';
 import { verifyIdTokenRoute } from "./src/verify-id-tokens/verify";
 import { readFileSync } from "fs";
 import { join } from "path";
-
+import { loginEmailPasswordRoute } from "./src/session/login";
 
 try {
 
@@ -17,6 +17,7 @@ try {
         console.log(req.method, req.url, req.body)
         next()
     })
+    app.post("/login", (req, res) => loginEmailPasswordRoute(req, res))
     app.post('/user', (req, res) => createUserRoute(req, res));
     app.get('/user/:uid', (req, res) => readUserRoute(req, res));
     app.patch('/user/:uid', (req, res) => updateUserRoute(req, res));
