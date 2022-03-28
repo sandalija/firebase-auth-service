@@ -6,6 +6,9 @@ WORKDIR /usr/src/app
 COPY package.json .
 COPY yarn.lock .
 
+ARG WEBAPIKEY
+ENV WEBAPIKEY=${WEBAPIKEY}
+
 RUN yarn
 
 COPY . . 

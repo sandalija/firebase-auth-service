@@ -8,3 +8,4 @@ services:
       - 8080:8080
     volumes:
       - ./service-account:/service-account
+    env_file: .env
