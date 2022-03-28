@@ -1,5 +1,5 @@
 import express, { Request, Response }  from "express"
-import { createUserRoute, updateUserRoute } from "./src/user-managment/crud";
+import { createUserRoute, deleteUserRoute, readUserRoute, updateUserRoute } from "./src/user-managment/crud";
 import * as firebase from 'firebase-admin';
 import serviceAccount from "./service-account";
 import * as sa from "./firebase-adminsdk.json"
@@ -16,7 +16,9 @@ try {
         next()
     })
     app.post('/user', (req, res) => createUserRoute(req, res));
+    app.get('/user/:uid', (req, res) => readUserRoute(req, res));
     app.patch('/user/:uid', (req, res) => updateUserRoute(req, res));
+    app.delete('/user/:uid', (req, res) => deleteUserRoute(req, res));
 
 
     app.get('/', (req: Request, res: Response) => {
