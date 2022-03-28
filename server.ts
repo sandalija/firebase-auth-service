@@ -3,6 +3,7 @@ import { createUserRoute, deleteUserRoute, readUserRoute, updateUserRoute } from
 import * as firebase from 'firebase-admin';
 import serviceAccount from "./service-account";
 import * as sa from "./firebase-adminsdk.json"
+import { verifyIdTokenRoute } from "./src/verify-id-tokens/verify";
 
 
 firebase.initializeApp({credential: firebase.credential.cert({...sa } as any),})
@@ -19,6 +20,9 @@ try {
     app.get('/user/:uid', (req, res) => readUserRoute(req, res));
     app.patch('/user/:uid', (req, res) => updateUserRoute(req, res));
     app.delete('/user/:uid', (req, res) => deleteUserRoute(req, res));
+
+    app.post('/verify-token', (req, res) => verifyIdTokenRoute(req, res));
+
 
 
     app.get('/', (req: Request, res: Response) => {
