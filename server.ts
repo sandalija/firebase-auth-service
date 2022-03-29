@@ -5,6 +5,7 @@ import { verifyIdTokenRoute } from "./src/verify-id-tokens/verify";
 import { readFileSync } from "fs";
 import { join } from "path";
 import { loginEmailPasswordRoute } from "./src/session/login";
+import { sendResetPasswordRoute } from "./src/session/resetEmail";
 
 try {
 
@@ -23,9 +24,8 @@ try {
     app.patch('/user/:uid', (req, res) => updateUserRoute(req, res));
     app.delete('/user/:uid', (req, res) => deleteUserRoute(req, res));
 
-    app.post('/verify-token', (req, res) => verifyIdTokenRoute(req, res));
-
-
+    app.post("/reset-password", (req, res) => sendResetPasswordRoute(req, res))
+    app.post('/verify-token', (req, res) => verifyIdTokenRoute(req, res))
 
     app.get('/', (req: Request, res: Response) => {
         res.send('Hello world\n');

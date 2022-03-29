@@ -1,16 +1,15 @@
+import firebaseClient from "../client/firebaseClient"
 import { Request, Response } from "express"
-import firebaseClient from "../client/firebaseClient";
 
 
-export const loginEmailPasswordRoute = async (req: Request, res: Response) => {
+export const sendResetPasswordRoute = async (req: Request, res: Response) => {
   try {
-    const { email, password } = req.body
+    const { email } = req.body
 
-    console.log({email, password})
-    const result = await firebaseClient.post("accounts:signInWithPassword",{
-      email: email.toString(),
-      password: password.toString(),
-      returnSecureToken: req.body.returnSecureToken === undefined ? true : req.body.returnSecureToken
+    console.log({email})
+    const result = await firebaseClient.post("accounts:sendOobCode",{
+      email: email,
+      requestType: "PASSWORD_RESET"
     })
     res.send(result.data)
   } catch (error: any) { // AxiosError instance
